@@ -164,11 +164,21 @@ mage_ma_single <- function(data, short_ma = 5, long_ma = 32, type = c('auto', 'p
     s2 <- crosses[i+1,1]
 
     if(crosses[i, "type"] == 0) {
-      minmax <- append(minmax, min(.data$gl[s1:s2], na.rm = TRUE))
+      minmaxcalc = min(.data$gl[s1:s2], na.rm = TRUE)
+      if (is.infinite(minmaxcalc)) {
+       minmaxcalc = 0
+      }
+
+      minmax <- append(minmax, minmaxcalc)
       # which.min/max will ignore NAs (index includes NAs but not counted max/min)
       indexes <- append(indexes,which.min(.data$gl[s1:s2])+s1-1) # append index to array
     } else {
-      minmax <- append(minmax, max(.data$gl[s1:s2], na.rm = TRUE))
+      minmaxcalc = max(.data$gl[s1:s2], na.rm = TRUE)
+      if (is.infinite(minmaxcalc)) {
+       minmaxcalc = 0
+      }
+
+      minmax <- append(minmax, minmaxcalc)
       indexes <- append(indexes, which.max(.data$gl[s1:s2])+s1-1)
     }
   }
