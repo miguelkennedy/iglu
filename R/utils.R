@@ -135,7 +135,7 @@ CGMS2DayByDay <- function(data, dt0 = NULL, inter_gap = 45, tz = ""){
   }
 
   if (dt0 > inter_gap){
-    stop(paste("Identified measurements frequency,", dt0, "min, is above the maximal interpolation gap of", inter_gap, "min."))
+    stop(paste("Identified measurements frequency,", dt0, "min, is above the maximal interpolation gap of", inter_gap, "min.", "Subject Id:", data$id[1]))
   }
 
   ### Check for misaligned grid length dt0 across days, and adjust if needed
